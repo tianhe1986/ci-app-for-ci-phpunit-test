@@ -42,6 +42,9 @@ class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
 	public function test_construct_fail_to_create_cache_file()
 	{
 		chmod(__DIR__.'/tmp', 0);
+		if(is_really_writable(__DIR__.'/tmp')){
+			$this->markTestSkipped('Ignored for root user');
+		}
 		$cache_file = __DIR__.'/tmp/cache_fail.php';
 		@new CIPHPUnitTestFileCache($cache_file);
 	}
@@ -53,6 +56,9 @@ class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
 	public function test_construct_fail_to_create_dir()
 	{
 		chmod(__DIR__.'/tmp', 0);
+		if(is_really_writable(__DIR__.'/tmp')){
+			$this->markTestSkipped('Ignored for root user');
+		}
 		$cache_file = __DIR__.'/tmp/sub/cache_fail.php';
 		@new CIPHPUnitTestFileCache($cache_file);
 	}
